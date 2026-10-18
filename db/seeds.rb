@@ -1,11 +1,29 @@
-Product.destroy_all
+require "csv"
 
-676.times do
+# Clear existing products and categories
+Product.destroy_all
+Category.destroy_all
+
+# Read CSV file
+csv_file = Rails.root.join("db/products.csv")
+csv_data = File.read(csv_file)
+
+products = CSV.parse(csv_data, headers: true)
+
+# Create products and categories
+products.each do |row|
+  category_name = row["category"]
+
+  category = Category.find_or_create_by!(name: category_name)
+
   Product.create!(
-    title: Faker::Commerce.product_name,
-    price: Faker::Commerce.price,
-    stock_quantity: Faker::Number.between(from: 1, to: 100)
+    title: row["name"],
+    description: row["description"],
+    price: row["price"],
+    stock_quantity: row["stock quantity"],
+    category: category
   )
 end
 
-puts "Successfully created #{Product.count} products!"
+puts "Created #{Product.count} products"
+puts "Created #{Category.count} categories"
