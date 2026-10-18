@@ -11,6 +11,33 @@
     color: #333;
   }
 
+  .search-container {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .search-input {
+    padding: 12px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .search-button {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .search-button:hover {
+    background-color: #218838;
+  }
+
   .product-count {
     text-align: center;
     font-size: 18px;
@@ -48,6 +75,19 @@
 
 <h1>🛍️ Welcome to Simple Store</h1>
 
+<div class="search-container">
+  <%= form_with url: "/products", method: :get, local: true do |form| %>
+
+    <%= form.text_field :search,
+        placeholder: "Search products...",
+        value: params[:search],
+        class: "search-input" %>
+
+    <%= form.submit "Search", class: "search-button" %>
+
+  <% end %>
+</div>
+
 <p class="product-count">
   Total Products: <%= @products.count %>
 </p>
@@ -58,8 +98,8 @@
 
     <div class="product-card">
 
-      <h2><%= product.title %></h2>
-
+      <h2><%= link_to product.title, product_path(product) %></h2>
+      
       <p class="price">
         $<%= number_with_precision(product.price, precision: 2) %>
       </p>
