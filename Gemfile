@@ -56,3 +56,4 @@ group :test do
   gem "selenium-webdriver"
 end
 gem "faker"
+gem "json", "2.7.2"
