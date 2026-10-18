@@ -1,36 +1,11 @@
-<style>
-  .product-details {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
-  }
+<h1><%= @product.title %></h1>
 
-  .product-details h1 {
-    color: #333;
-  }
+<p>Description: <%= @product.description %></p>
 
-  .price {
-    color: #28a745;
-    font-size: 24px;
-    font-weight: bold;
-  }
-</style>
+<p>Price: $<%= number_with_precision(@product.price, precision: 2) %></p>
 
-<div class="product-details">
-  <h1><%= @product.title %></h1>
+<p>Stock Available: <%= @product.stock_quantity %></p>
 
-  <p><%= @product.description %></p>
+<p>Category: <%= @product.category.name %></p>
 
-  <p class="price">
-    $<%= number_with_precision(@product.price, precision: 2) %>
-  </p>
-
-  <p>Stock Available: <%= @product.stock_quantity %></p>
-  <p>Category: <%= @product.category.name %></p>
-
-  <%= link_to "← Back to Products", "/products" %>
-</div>
+<%= link_to "Back to Products", products_path %>
