@@ -99,7 +99,7 @@
     <div class="product-card">
 
       <h2><%= link_to product.title, product_path(product) %></h2>
-      
+
       <p class="price">
         $<%= number_with_precision(product.price, precision: 2) %>
       </p>
@@ -107,7 +107,10 @@
       <p class="stock">
         Stock Available: <%= product.stock_quantity %>
       </p>
-
+      
+<p class="category">
+  Category: <%= product.category.name %>
+</p>
     </div>
 
   <% end %>
